@@ -9,8 +9,8 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyName>BragiFont.MonogameDevEnv</AssemblyName>
-    <RootNamespace>BragiFont.MonogameDevEnv</RootNamespace>
+    <AssemblyName>Velentr.Font.MonogameDevEnv</AssemblyName>
+    <RootNamespace>Velentr.Font.MonogameDevEnv</RootNamespace>
     <Version>1.1.0</Version>
   </PropertyGroup>
   <ItemGroup>

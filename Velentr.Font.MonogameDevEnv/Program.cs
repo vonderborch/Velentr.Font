@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BragiFont.MonogameDevEnv
+namespace Velentr.Font.MonogameDevEnv
 {
     public static class Program
     {

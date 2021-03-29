@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace BragiFont.MonogameDevEnv
+namespace Velentr.Font.MonogameDevEnv
 {
     public class Game1 : Game
     {
@@ -16,8 +16,8 @@ namespace BragiFont.MonogameDevEnv
         private Text text2;
 
 
-        BragiFont.Font font1;
-        BragiFont.Font font2;
+        Font font1;
+        Font font2;
 
         public Game1()
         {
@@ -34,12 +34,12 @@ namespace BragiFont.MonogameDevEnv
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Bragi.Core.Initialize(GraphicsDevice);
+            VelentrFont.Core.Initialize(GraphicsDevice);
 
-            font1 = Bragi.Core.GetFont(fontFile1, 80);
+            font1 = VelentrFont.Core.GetFont(fontFile1, 80);
             text1 = font1.MakeText(testString);
 
-            font2 = Bragi.Core.GetFont(fontFile2, 34);
+            font2 = VelentrFont.Core.GetFont(fontFile2, 34);
             text2 = font2.MakeText(testString2);
         }
 

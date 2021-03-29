@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Velentr.Font.Core\Bragi.cs" Link="Bragi.cs" />
     <Compile Include="..\Velentr.Font.Core\Constants.cs" Link="Constants.cs" />
     <Compile Include="..\Velentr.Font.Core\DrawStringExtensions.cs" Link="DrawStringExtensions.cs" />
     <Compile Include="..\Velentr.Font.Core\Font.cs" Link="Font.cs" />
@@ -43,6 +42,7 @@
     <Compile Include="..\Velentr.Font.Core\Internal\TypefaceImplementation.cs" Link="Internal\TypefaceImplementation.cs" />
     <Compile Include="..\Velentr.Font.Core\Text.cs" Link="Text.cs" />
     <Compile Include="..\Velentr.Font.Core\Typeface.cs" Link="Typeface.cs" />
+    <Compile Include="..\Velentr.Font.Core\VelentrFont.cs" Link="VelentrFont.cs" />
   </ItemGroup>
 
   <ItemGroup>

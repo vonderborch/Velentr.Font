@@ -9,8 +9,8 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyName>BragiFont.FNADevEnv</AssemblyName>
-    <RootNamespace>BragiFont.FNADevEnv</RootNamespace>
+    <AssemblyName>Velentr.Font.FNADevEnv</AssemblyName>
+    <RootNamespace>Velentr.Font.FNADevEnv</RootNamespace>
     <Version>1.1.0</Version>
   </PropertyGroup>
   <ItemGroup>
