@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <TieredCompilation>false</TieredCompilation>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <AssemblyName>BragiFont.FNADevEnv</AssemblyName>
+    <RootNamespace>BragiFont.FNADevEnv</RootNamespace>
+    <Version>1.1.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Content\PlayfairDisplayRegular-ywLOY.ttf" />
+    <None Remove="Content\Trueno-wml2.otf" />
+    <None Remove="Icon.ico" />
+    <None Remove="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PlayfairDisplayRegular-ywLOY.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Trueno-wml2.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icon.ico" />
+    <EmbeddedResource Include="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="fnalibs" Version="21.3.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\Velentr.Font.FNA\Velentr.Font.FNA.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="C:\Users\ricky\.nuget\packages\fnalibs\21.3.5\build\..\lib\x64\SDL2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="C:\Users\ricky\.nuget\packages\fnalibs\21.3.5\build\..\lib\x86\SDL2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
