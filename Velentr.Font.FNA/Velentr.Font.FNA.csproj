@@ -7,11 +7,11 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Authors>Christian Webber</Authors>
     <Company>Christian Webber</Company>
-    <RepositoryUrl>https://github.com/vonderborch/BragiFont</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/vonderborch/BragiFont</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vonderborch/Velentr.Font</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/vonderborch/Velentr.Font</PackageProjectUrl>
     <Description>An alternative solution for Monogame/FNA/XNA-derived frameworks that utilizes SharpFont to draw text rather than the traditional SpriteFont approach.</Description>
     <PackageTags>SharpFont, FNA, SpriteFont, Font</PackageTags>
-    <Version>1.1.0</Version>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
