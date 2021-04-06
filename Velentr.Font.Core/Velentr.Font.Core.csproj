@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Platforms>AnyCPU</Platforms>
     <RootNamespace>Velentr.Font</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +12,7 @@
     <PackageReference Include="SharpFont.Dependencies" Version="2.6.0" />
     <PackageReference Include="SharpFont.NetStandard" Version="1.0.2" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+    <PackageReference Include="Velentr.Collections" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

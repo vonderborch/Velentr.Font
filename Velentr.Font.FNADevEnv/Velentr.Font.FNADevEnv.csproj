@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="fnalibs" Version="21.3.5" />
+    <PackageReference Include="Velentr.Collections" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FNA\FNA.Core.csproj" />

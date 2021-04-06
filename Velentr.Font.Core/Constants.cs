@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SharpFont;
 
@@ -116,6 +118,38 @@ namespace Velentr.Font
         /// The maximum size of the TextCache object on a particular font
         /// </summary>
         public int MaxTextCacheSize = 16;
+
+        private Dictionary<string, Color> _colorMapping = null;
+
+        public Dictionary<string, Color> ColorMapping
+        {
+            get
+            {
+                if (_colorMapping == null)
+                {
+                    _colorMapping = new Dictionary<string, Color>();
+                    var props = typeof(Color).GetProperties();
+
+                    foreach (var color in props)
+                    {
+                        switch (color.Name)
+                        {
+                            case "PackedValue":
+                            case "B":
+                            case "G":
+                            case "R":
+                            case "A":
+                                break;
+                            default:
+                                _colorMapping[color.Name.ToUpperInvariant()] = (Color)color.GetValue(color);
+                                break;
+                        }
+                    }
+                }
+
+                return _colorMapping;
+            }
+        }
 
     }
 }
