@@ -200,7 +200,7 @@ namespace Velentr.Font
                 }
 
                 // Markdown rules
-                if (applyMarkdown && text[i] == '[')
+                if (applyMarkdown && text[i] == '[' && (i > 0 && text[i - 1] != '\\'))
                 {
                     var results = ApplyMarkdownCommands(text, color, i);
                     i = results.Item1;
@@ -339,7 +339,7 @@ namespace Velentr.Font
                 }
 
                 // Markdown rules
-                if (applyMarkdown && text[i] == '[')
+                if (applyMarkdown && text[i] == '[' && (i > 0 && text[i - 1] != '\\'))
                 {
                     var results = ApplyMarkdownCommands(text, color, i);
                     i = results.Item1;
@@ -440,7 +440,7 @@ namespace Velentr.Font
                     }
 
                     // Markdown rules
-                    if (applyMarkdown && text[i] == '[')
+                    if (applyMarkdown && text[i] == '[' && (i > 0 && text[i - 1] != '\\'))
                     {
                         var results = ApplyMarkdownCommands(text, Color.White, i);
                         i = results.Item1;
@@ -542,7 +542,7 @@ namespace Velentr.Font
                 }
 
                 // Markdown rules
-                if (text[i] == '[')
+                if (text[i] == '[' && (i > 0 && text[i - 1] != '\\'))
                 {
                     var results = ApplyMarkdownCommands(text, Color.White, i);
                     i = results.Item1;
@@ -759,6 +759,13 @@ namespace Velentr.Font
             int finalIIndex;
             int endIndex;
             var finalColor = defaultColor;
+
+            // exit early if we're at the end of the string
+            if (text.Length <= currentIndex + 1)
+            {
+                return (currentIndex, finalColor);
+            }
+
             switch (text[currentIndex + 1])
             {
                 // invalid markdown, we'll skip this markdown...
