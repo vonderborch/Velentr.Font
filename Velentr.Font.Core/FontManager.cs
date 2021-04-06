@@ -80,14 +80,13 @@ namespace Velentr.Font
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="size">The size.</param>
-        /// <param name="graphicsDevice">The graphics device.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
         /// <param name="storeTypefaceFileData">The store typeface file data.</param>
         /// <returns></returns>
-        public Font GetFont(string path, int size, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null, bool? storeTypefaceFileData = null)
+        public Font GetFont(string path, int size, bool preGenerateCharacters = false, char[] charactersToPregenerate = null, bool? storeTypefaceFileData = null)
         {
-            var typeface = GetTypefaceInternal(path, File.ReadAllBytes(path), graphicsDevice, preGenerateCharacters, charactersToPregenerate, storeTypefaceFileData);
+            var typeface = GetTypefaceInternal(path, File.ReadAllBytes(path), preGenerateCharacters, charactersToPregenerate, storeTypefaceFileData);
             return typeface.GetFont(size, preGenerateCharacters, charactersToPregenerate);
         }
 
@@ -97,14 +96,13 @@ namespace Velentr.Font
         /// <param name="name">The name.</param>
         /// <param name="fileStream">The file stream.</param>
         /// <param name="size">The size.</param>
-        /// <param name="graphicsDevice">The graphics device.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
         /// <returns></returns>
-        public Font GetFont(string name, Stream fileStream, int size, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
+        public Font GetFont(string name, Stream fileStream, int size, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
         {
             var buffer = Helpers.ReadStream(fileStream);
-            var typeface = GetTypefaceInternal(name, buffer, graphicsDevice, preGenerateCharacters, charactersToPregenerate, true);
+            var typeface = GetTypefaceInternal(name, buffer, preGenerateCharacters, charactersToPregenerate, true);
             return typeface.GetFont(size, preGenerateCharacters, charactersToPregenerate);
         }
 
@@ -114,13 +112,12 @@ namespace Velentr.Font
         /// <param name="name">The name.</param>
         /// <param name="fileData">The file data.</param>
         /// <param name="size">The size.</param>
-        /// <param name="graphicsDevice">The graphics device.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
         /// <returns></returns>
-        public Font GetFont(string name, byte[] fileData, int size, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
+        public Font GetFont(string name, byte[] fileData, int size, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
         {
-            var typeface = GetTypefaceInternal(name, fileData, graphicsDevice, preGenerateCharacters, charactersToPregenerate, true);
+            var typeface = GetTypefaceInternal(name, fileData, preGenerateCharacters, charactersToPregenerate, true);
             return typeface.GetFont(size, preGenerateCharacters, charactersToPregenerate);
         }
 
@@ -129,14 +126,13 @@ namespace Velentr.Font
         /// </summary>
         /// <param name="path">The path to load the font from.</param>
         /// <param name="size">The size of the font.</param>
-        /// <param name="graphicsDevice">The graphics device. Optional, but required if VelentrFont.Core.Initialize() hasn't been called yet.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
         /// <returns>The Font that matches the specified parameters.</returns>
         /// <exception cref="Exception">GraphicsDevice is not initialized! Please either initialize VelentrFont.Core or provide the GraphicsDevice when getting a new font.</exception>
-        public Typeface GetTypeface(string path, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null, bool? storeTypefaceFileData = null)
+        public Typeface GetTypeface(string path, bool preGenerateCharacters = false, char[] charactersToPregenerate = null, bool? storeTypefaceFileData = null)
         {
-            return GetTypefaceInternal(path, File.ReadAllBytes(path), graphicsDevice, preGenerateCharacters, charactersToPregenerate, storeTypefaceFileData);
+            return GetTypefaceInternal(path, File.ReadAllBytes(path), preGenerateCharacters, charactersToPregenerate, storeTypefaceFileData);
         }
 
         /// <summary>
@@ -144,14 +140,13 @@ namespace Velentr.Font
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="fileStream">The file stream.</param>
-        /// <param name="graphicsDevice">The graphics device.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
         /// <returns>The Font that matches the specified parameters.</returns>
-        public Typeface GetTypeface(string name, Stream fileStream, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
+        public Typeface GetTypeface(string name, Stream fileStream, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
         {
             var buffer = Helpers.ReadStream(fileStream);
-            return GetTypefaceInternal(name, buffer, graphicsDevice, preGenerateCharacters, charactersToPregenerate, true);
+            return GetTypefaceInternal(name, buffer, preGenerateCharacters, charactersToPregenerate, true);
         }
 
         /// <summary>
@@ -159,13 +154,12 @@ namespace Velentr.Font
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="fileData">The file data.</param>
-        /// <param name="graphicsDevice">The graphics device.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
         /// <returns>The Font that matches the specified parameters.</returns>
-        public Typeface GetTypeface(string name, byte[] fileData, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
+        public Typeface GetTypeface(string name, byte[] fileData, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
         {
-            return GetTypefaceInternal(name, fileData, graphicsDevice, preGenerateCharacters, charactersToPregenerate, true);
+            return GetTypefaceInternal(name, fileData, preGenerateCharacters, charactersToPregenerate, true);
         }
 
         /// <summary>
@@ -173,24 +167,13 @@ namespace Velentr.Font
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="fileData">The file data.</param>
-        /// <param name="graphicsDevice">The graphics device.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
         /// <param name="storeTypefaceFileData">The store typeface file data.</param>
         /// <returns></returns>
         /// <exception cref="System.Exception">GraphicsDevice is not initialized! Please either initialize VelentrFont.Core or provide the GraphicsDevice when getting a new font.</exception>
-        private Typeface GetTypefaceInternal(string name, byte[] fileData, GraphicsDevice graphicsDevice, bool preGenerateCharacters, char[] charactersToPregenerate, bool? storeTypefaceFileData)
+        private Typeface GetTypefaceInternal(string name, byte[] fileData, bool preGenerateCharacters, char[] charactersToPregenerate, bool? storeTypefaceFileData)
         {
-            if (graphicsDevice == null && GraphicsDevice == null)
-            {
-                throw new Exception("GraphicsDevice is not initialized! Please either initialize VelentrFont.Core or provide the GraphicsDevice when getting a new font.");
-            }
-
-            if (graphicsDevice != null)
-            {
-                GraphicsDevice = graphicsDevice;
-            }
-
             if (storeTypefaceFileData == null)
             {
                 storeTypefaceFileData = Constants.Settings.StoreFontFileData;
