@@ -22,6 +22,7 @@
     <Compile Include="..\Velentr.Font.Core\Constants.cs" Link="Constants.cs" />
     <Compile Include="..\Velentr.Font.Core\DrawStringExtensions.cs" Link="DrawStringExtensions.cs" />
     <Compile Include="..\Velentr.Font.Core\Font.cs" Link="Font.cs" />
+    <Compile Include="..\Velentr.Font.Core\FontManager.cs" Link="FontManager.cs" />
     <Compile Include="..\Velentr.Font.Core\Internal\Cache.cs" Link="Internal\Cache.cs" />
     <Compile Include="..\Velentr.Font.Core\Internal\FontImplementation.cs" Link="Internal\FontImplementation.cs" />
     <Compile Include="..\Velentr.Font.Core\Internal\Glyph.cs" Link="Internal\Glyph.cs" />
@@ -32,13 +33,13 @@
     <Compile Include="..\Velentr.Font.Core\Internal\TypefaceImplementation.cs" Link="Internal\TypefaceImplementation.cs" />
     <Compile Include="..\Velentr.Font.Core\Text.cs" Link="Text.cs" />
     <Compile Include="..\Velentr.Font.Core\Typeface.cs" Link="Typeface.cs" />
-    <Compile Include="..\Velentr.Font.Core\VelentrFont.cs" Link="VelentrFont.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="SharpFont.NetStandard" Version="1.0.2" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+    <PackageReference Include="Velentr.Collections" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

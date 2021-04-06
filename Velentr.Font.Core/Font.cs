@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using SharpFont;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using SharpFont;
 using Velentr.Font.Internal;
 
 namespace Velentr.Font
@@ -12,6 +12,11 @@ namespace Velentr.Font
 
     public abstract class Font : IEquatable<Font>, IDisposable
     {
+
+        /// <summary>
+        /// The manager
+        /// </summary>
+        private FontManager _manager;
 
         /// <summary>
         /// Caches of glyphs
@@ -34,12 +39,14 @@ namespace Velentr.Font
         /// <param name="size">Size of the font.</param>
         /// <param name="face">The font face.</param>
         /// <param name="typefaceName">The typefaceName.</param>
-        protected Font(int size, Face face, string typefaceName)
+        /// <param name="manager">The font manager.</param>
+        protected Font(int size, Face face, string typefaceName, FontManager manager)
         {
             Size = size;
             TypefaceName = typefaceName;
             Face = face;
             FontFamily = face.FamilyName;
+            _manager = manager;
 
             GlyphHeight = face.Size.Metrics.Height.Ceiling();
         }
@@ -122,7 +129,7 @@ namespace Velentr.Font
         /// <value>
         /// The typeface.
         /// </value>
-        public Typeface Typeface => VelentrFont.Core.GetStoredTypeface(TypefaceName);
+        public Typeface Typeface => _manager.GetStoredTypeface(TypefaceName);
 
         /// <summary>
         /// Gets the name of the typeface the font is associated with.
@@ -639,13 +646,13 @@ namespace Velentr.Font
             var cache = _glyphCaches.FirstOrDefault(c => !c.Full);
             if (cache == null)
             {
-                cache = new GlyphCache(this);
+                cache = new GlyphCache(this, _manager);
                 _glyphCaches.Add(cache);
             }
 
             if (!cache.AddCharacterToCache(character, out var cachedGlyph))
             {
-                cache = new GlyphCache(this);
+                cache = new GlyphCache(this, _manager);
                 _glyphCaches.Add(cache);
                 if (!cache.AddCharacterToCache(character, out cachedGlyph))
                 {

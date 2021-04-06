@@ -3,55 +3,56 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using SharpFont;
+using Velentr.Collections.Collections.Concurrent;
 using Velentr.Font.Internal;
 
 namespace Velentr.Font
 {
+
     /// <summary>
-    /// The core font system.
+    /// 
     /// </summary>
     /// <seealso cref="System.IDisposable" />
-    public sealed class VelentrFont : IDisposable
+    public class FontManager : IDisposable
     {
-        /// <summary>
-        /// The SharpFont library.
-        /// </summary>
-        private static readonly Library Library;
 
         /// <summary>
-        /// The fonts we haved cached.
+        /// The libraries
         /// </summary>
-        private static readonly Dictionary<string, Typeface> Typefaces;
+        private ConcurrentPool<Library> _libraries;
 
         /// <summary>
-        /// Initializes the <see cref="VelentrFont"/> class.
+        /// The fonts we have cached.
         /// </summary>
-        static VelentrFont()
+        private readonly Dictionary<string, Typeface> typefaces;
+
+        /// <summary>
+        /// Initializes the <see cref="FontManager"/> class.
+        /// </summary>
+        public FontManager(GraphicsDevice graphicsDevice)
         {
-            Library = new Library();
-            Typefaces = new Dictionary<string, Typeface>();
+            _libraries = new ConcurrentPool<Library>(capacity: 1);
+            typefaces = new Dictionary<string, Typeface>();
+            GraphicsDevice = graphicsDevice;
         }
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="VelentrFont"/> class from being created.
+        /// Gets the library.
         /// </summary>
-        private VelentrFont() { }
+        /// <returns></returns>
+        internal Library GetLibrary()
+        {
+            return _libraries.Get();
+        }
 
         /// <summary>
-        /// Gets the FontSystem.
+        /// Returns the library.
         /// </summary>
-        /// <value>
-        /// The FontSystem.
-        /// </value>
-        public static VelentrFont Core { get; } = new VelentrFont();
-
-        /// <summary>
-        /// Gets the font library.
-        /// </summary>
-        /// <value>
-        /// The font library.
-        /// </value>
-        internal Library FontLibrary => Library;
+        /// <param name="library">The library.</param>
+        internal void ReturnLibrary(Library library)
+        {
+            _libraries.Return(library);
+        }
 
         /// <summary>
         /// Gets the graphics device.
@@ -66,29 +67,40 @@ namespace Velentr.Font
         /// </summary>
         public void Dispose()
         {
-            foreach (var font in Typefaces.Values)
+            foreach (var font in typefaces.Values)
             {
                 font.DisposeFinal();
             }
 
-            Library.Dispose();
+            _libraries.Dispose();
         }
 
         /// <summary>
-        /// Initializes the specified graphics device.
+        /// Gets the font.
         /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="size">The size.</param>
         /// <param name="graphicsDevice">The graphics device.</param>
-        public void Initialize(GraphicsDevice graphicsDevice)
-        {
-            GraphicsDevice = graphicsDevice;
-        }
-
+        /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
+        /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
+        /// <param name="storeTypefaceFileData">The store typeface file data.</param>
+        /// <returns></returns>
         public Font GetFont(string path, int size, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null, bool? storeTypefaceFileData = null)
         {
             var typeface = GetTypefaceInternal(path, File.ReadAllBytes(path), graphicsDevice, preGenerateCharacters, charactersToPregenerate, storeTypefaceFileData);
             return typeface.GetFont(size, preGenerateCharacters, charactersToPregenerate);
         }
 
+        /// <summary>
+        /// Gets the font.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="fileStream">The file stream.</param>
+        /// <param name="size">The size.</param>
+        /// <param name="graphicsDevice">The graphics device.</param>
+        /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
+        /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
+        /// <returns></returns>
         public Font GetFont(string name, Stream fileStream, int size, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
         {
             var buffer = Helpers.ReadStream(fileStream);
@@ -96,6 +108,16 @@ namespace Velentr.Font
             return typeface.GetFont(size, preGenerateCharacters, charactersToPregenerate);
         }
 
+        /// <summary>
+        /// Gets the font.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="fileData">The file data.</param>
+        /// <param name="size">The size.</param>
+        /// <param name="graphicsDevice">The graphics device.</param>
+        /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
+        /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
+        /// <returns></returns>
         public Font GetFont(string name, byte[] fileData, int size, GraphicsDevice graphicsDevice = null, bool preGenerateCharacters = false, char[] charactersToPregenerate = null)
         {
             var typeface = GetTypefaceInternal(name, fileData, graphicsDevice, preGenerateCharacters, charactersToPregenerate, true);
@@ -174,11 +196,11 @@ namespace Velentr.Font
                 storeTypefaceFileData = Constants.Settings.StoreFontFileData;
             }
 
-            if (!Typefaces.TryGetValue(name, out var typeface))
+            if (!typefaces.TryGetValue(name, out var typeface))
             {
-                typeface = new TypefaceImplementation(name, fileData, preGenerateCharacters, charactersToPregenerate, (bool)storeTypefaceFileData);
+                typeface = new TypefaceImplementation(name, fileData, preGenerateCharacters, charactersToPregenerate, (bool)storeTypefaceFileData, this);
 
-                Typefaces.Add(name, typeface);
+                typefaces.Add(name, typeface);
             }
 
             return typeface;
@@ -191,7 +213,7 @@ namespace Velentr.Font
         /// <returns></returns>
         internal Typeface GetStoredTypeface(string name)
         {
-            return Typefaces[name];
+            return typefaces[name];
         }
 
         /// <summary>
@@ -200,14 +222,14 @@ namespace Velentr.Font
         /// <param name="key">The key for the font we want to remove.</param>
         internal void RemoveTypeface(string name, bool dispose = true)
         {
-            if (Typefaces.ContainsKey(name))
+            if (typefaces.ContainsKey(name))
             {
                 if (dispose)
                 {
-                    Typefaces[name].DisposeFinal();
+                    typefaces[name].DisposeFinal();
                 }
 
-                Typefaces.Remove(name);
+                typefaces.Remove(name);
             }
         }
     }

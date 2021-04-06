@@ -47,6 +47,11 @@ namespace Velentr.Font.Internal
         private int _currentY;
 
         /// <summary>
+        /// The manager
+        /// </summary>
+        private FontManager _manager;
+
+        /// <summary>
         /// Whether the Cache is full (true) or not (false).
         /// </summary>
         public bool Full;
@@ -60,10 +65,12 @@ namespace Velentr.Font.Internal
         /// Initializes a new instance of the <see cref="GlyphCache"/> class.
         /// </summary>
         /// <param name="font">The font.</param>
-        public GlyphCache(Font font)
+        /// <param name="manager">The font manager.</param>
+        public GlyphCache(Font font, FontManager manager)
         {
+            _manager = manager;
             _font = font;
-            switch (VelentrFont.Core.GraphicsDevice.GraphicsProfile)
+            switch (_manager.GraphicsDevice.GraphicsProfile)
             {
                 case GraphicsProfile.HiDef:
                     Height = Constants.DEFAULT_HIDEF_TEXTURE_SIZE;
@@ -75,7 +82,7 @@ namespace Velentr.Font.Internal
                     break;
             }
 
-            Texture = new Texture2D(VelentrFont.Core.GraphicsDevice, Width, Height, false, Constants.DEFAULT_CACHE_SURFACE_FORMAT);
+            Texture = new Texture2D(_manager.GraphicsDevice, Width, Height, false, Constants.DEFAULT_CACHE_SURFACE_FORMAT);
         }
 
         /// <summary>

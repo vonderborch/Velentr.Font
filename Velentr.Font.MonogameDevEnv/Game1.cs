@@ -15,6 +15,8 @@ namespace Velentr.Font.MonogameDevEnv
         private Text text1;
         private Text text2;
 
+        private FontManager manager;
+
 
         Font font1;
         Font font2;
@@ -34,12 +36,12 @@ namespace Velentr.Font.MonogameDevEnv
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            VelentrFont.Core.Initialize(GraphicsDevice);
+            manager = new FontManager(GraphicsDevice);
 
-            font1 = VelentrFont.Core.GetFont(fontFile1, 80);
+            font1 = manager.GetFont(fontFile1, 80);
             text1 = font1.MakeText(testString);
 
-            font2 = VelentrFont.Core.GetFont(fontFile2, 34);
+            font2 = manager.GetFont(fontFile2, 34);
             text2 = font2.MakeText(testString2);
         }
 

@@ -12,6 +12,12 @@ namespace Velentr.Font
     /// <seealso cref="System.IDisposable" />
     public abstract class Typeface : IEquatable<Typeface>, IDisposable
     {
+
+        /// <summary>
+        /// The manager
+        /// </summary>
+        private FontManager _manager;
+
         /// <summary>
         /// The fonts
         /// </summary>
@@ -25,9 +31,11 @@ namespace Velentr.Font
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPreGenerate">The characters to pre generate.</param>
         /// <param name="storeTypefaceFileData">if set to <c>true</c> [store typeface file data].</param>
-        protected Typeface(string name, byte[] typefaceData, bool preGenerateCharacters, char[] charactersToPreGenerate, bool storeTypefaceFileData)
+        /// <param name="manager">The font manager.</param>
+        protected Typeface(string name, byte[] typefaceData, bool preGenerateCharacters, char[] charactersToPreGenerate, bool storeTypefaceFileData, FontManager manager)
         {
             Name = name;
+            _manager = manager;
 
             if (storeTypefaceFileData)
             {
@@ -80,7 +88,7 @@ namespace Velentr.Font
         public void Dispose()
         {
             DisposeFinal();
-            VelentrFont.Core.RemoveTypeface(Name);
+            _manager.RemoveTypeface(Name);
         }
 
         /// <summary>
@@ -130,10 +138,20 @@ namespace Velentr.Font
         {
             if (!Fonts.TryGetValue(size, out var font))
             {
-                var face = GetFace();
+                var library = _manager.GetLibrary();
+                Face face;
+                if (TypefaceData == null)
+                {
+                    face = library.NewFace(Name, 0);
+                }
+                else
+                {
+                    face = new Face(library, TypefaceData, 0);
+                }
+
                 face.SetCharSize(size, size, 0, 0);
                 face.SetTransform();
-                font = new FontImplementation(size, face, Name);
+                font = new FontImplementation(size, face, Name, _manager);
 
                 preGenerateCharacters = preGenerateCharacters ?? PreGenerateCharacters;
                 charactersToPreGenerate = charactersToPreGenerate ?? CharactersToPreGenerate;
@@ -143,6 +161,7 @@ namespace Velentr.Font
                 }
 
                 Fonts.Add(size, font);
+                _manager.ReturnLibrary(library);
             }
 
             return font;
@@ -166,20 +185,6 @@ namespace Velentr.Font
         public void RemoveFont(int size)
         {
             Fonts.Remove(size);
-        }
-
-        /// <summary>
-        /// Gets the face.
-        /// </summary>
-        /// <returns>The face</returns>
-        private Face GetFace()
-        {
-            if (TypefaceData == null)
-            {
-                return VelentrFont.Core.FontLibrary.NewFace(Name, 0);
-            }
-
-            return new Face(VelentrFont.Core.FontLibrary, TypefaceData, 0);
         }
     }
 }
