@@ -25,6 +25,10 @@ _spriteBatch.DrawString(text, new Vector2(50, 50), Color.White);
 
 ```
 
+# Markdown
+Some new draw methods have been added to SpriteBatch (`DrawStringWithMarkdown`). These methods accept string that have had markdown applied to them, such as the following string: `Hello [c: Pink]World![/]`. Current Markdown Commands supported:
+- `c`/`C`/`Color`/`COLOR`: Accepts the string name of an XNA-derived framework color (such as White, Black, etc. Anything under Color.).
+
 # Example
 Code:
 ```
