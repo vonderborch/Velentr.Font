@@ -103,12 +103,14 @@ namespace Velentr.Font
         /// <param name="spriteBatch">The sprite batch.</param>
         /// <param name="position">The position to draw the text at.</param>
         /// <param name="color">The color to draw the text with.</param>
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
+        /// <param name="color">The color to draw the text with.</param>
+        /// <param name="applyMarkdown">Whether to apply markdown commands or not. Defaults to false. If set to true, Color will be the default color.</param>
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, bool applyMarkdown = false)
         {
             // ReSharper disable once ForCanBeConvertedToForeach
             for (var i = 0; i < Characters.Count; i++)
             {
-                spriteBatch.Draw(Characters[i].Character.GlyphCache.Texture, Characters[i].Position + position, Characters[i].Character.Boundary, color);
+                spriteBatch.Draw(Characters[i].Character.GlyphCache.Texture, Characters[i].Position + position, Characters[i].Character.Boundary, applyMarkdown ? Characters[i].Color ?? color : color);
             }
         }
 
@@ -123,7 +125,8 @@ namespace Velentr.Font
         /// <param name="scale">A scaling of this string.</param>
         /// <param name="effects">Modifications for drawing. Can be combined.</param>
         /// <param name="layerDepth">A depth of the layer of this string.</param>
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
+        /// <param name="applyMarkdown">Whether to apply markdown commands or not. Defaults to false. If set to true, Color will be the default color.</param>
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth, bool applyMarkdown = false)
         {
             var flipAdjustment = Vector2.Zero;
             var flippedVertically = effects.HasFlag(SpriteEffects.FlipVertically);
@@ -176,7 +179,7 @@ namespace Velentr.Font
             {
                 var characterPosition = Characters[i].Position;
                 Vector2.Transform(ref characterPosition, ref transformation, out characterPosition);
-                spriteBatch.Draw(Characters[i].Character.GlyphCache.Texture, characterPosition, Characters[i].Character.Boundary, color, rotation, origin, scale, effects, layerDepth);
+                spriteBatch.Draw(Characters[i].Character.GlyphCache.Texture, characterPosition, Characters[i].Character.Boundary, applyMarkdown ? Characters[i].Color ?? color : color, rotation, origin, scale, effects, layerDepth);
             }
         }
 

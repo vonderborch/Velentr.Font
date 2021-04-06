@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/vonderborch/Velentr.Font</PackageProjectUrl>
     <Description>An alternative solution for Monogame/FNA/XNA-derived frameworks that utilizes SharpFont to draw text rather than the traditional SpriteFont approach.</Description>
     <PackageTags>SharpFont, Monogame, SpriteFont, Font</PackageTags>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -21,6 +21,7 @@
   <ItemGroup>
     <Compile Include="..\Velentr.Font.Core\Constants.cs" Link="Constants.cs" />
     <Compile Include="..\Velentr.Font.Core\DrawStringExtensions.cs" Link="DrawStringExtensions.cs" />
+    <Compile Include="..\Velentr.Font.Core\DrawStringMarkdownExtensions.cs" Link="DrawStringMarkdownExtensions.cs" />
     <Compile Include="..\Velentr.Font.Core\Font.cs" Link="Font.cs" />
     <Compile Include="..\Velentr.Font.Core\FontManager.cs" Link="FontManager.cs" />
     <Compile Include="..\Velentr.Font.Core\Internal\Cache.cs" Link="Internal\Cache.cs" />

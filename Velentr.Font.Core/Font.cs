@@ -163,7 +163,8 @@ namespace Velentr.Font
         /// <param name="text">The text.</param>
         /// <param name="color">The color.</param>
         /// <param name="boundaries">The boundaries.</param>
-        public void Draw(SpriteBatch spriteBatch, string text, Color color, Rectangle boundaries)
+        /// <param name="applyMarkdown">Whether to apply markdown commands or not. Defaults to false. If set to true, Color will be the default color.</param>
+        public void Draw(SpriteBatch spriteBatch, string text, Color color, Rectangle boundaries, bool applyMarkdown = false)
         {
             var warpLine = boundaries.Width > 0;
             var offsetX = 0;
@@ -176,6 +177,7 @@ namespace Velentr.Font
             var underrun = 0;
             var finalCharacterIndex = text.Length - 1;
 
+            var currentColor = color;
             for (var i = 0; i < text.Length; i++)
             {
                 TryGetGlyph(text[i], out var cachedCharacter);
@@ -197,6 +199,15 @@ namespace Velentr.Font
                     return;
                 }
 
+                // Markdown rules
+                if (applyMarkdown && text[i] == '[')
+                {
+                    var results = ApplyMarkdownCommands(text, color, i);
+                    i = results.Item1;
+                    currentColor = results.Item2;
+                    continue;
+                }
+
                 // calculate underrun
                 underrun += -cachedCharacter.BearingX;
                 if (offsetX == 0)
@@ -209,7 +220,7 @@ namespace Velentr.Font
                     underrun = 0;
                 }
 
-                spriteBatch.Draw(cachedCharacter.GlyphCache.Texture, new Vector2(boundaries.X + offsetX, boundaries.Y + offsetY), cachedCharacter.Boundary, color);
+                spriteBatch.Draw(cachedCharacter.GlyphCache.Texture, new Vector2(boundaries.X + offsetX, boundaries.Y + offsetY), cachedCharacter.Boundary, currentColor);
                 offsetX += cachedCharacter.Boundary.Width;
 
                 // calculate kerning
@@ -229,7 +240,20 @@ namespace Velentr.Font
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, string text, Color color, Rectangle boundaries, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
+        /// <summary>
+        /// Draws the text to the screen at the specified position and with the specified color.
+        /// </summary>
+        /// <param name="spriteBatch">The sprite batch.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="color">The color.</param>
+        /// <param name="boundaries">The boundaries.</param>
+        /// <param name="rotation">The rotation.</param>
+        /// <param name="origin">The origin.</param>
+        /// <param name="scale">The scale.</param>
+        /// <param name="effects">The effects.</param>
+        /// <param name="layerDepth">The layer depth.</param>
+        /// <param name="applyMarkdown">Whether to apply markdown commands or not. Defaults to false. If set to true, Color will be the default color.</param>
+        public void Draw(SpriteBatch spriteBatch, string text, Color color, Rectangle boundaries, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth, bool applyMarkdown = false)
         {
             // calculate our transformation matrix
             var flipAdjustment = Vector2.Zero;
@@ -292,6 +316,7 @@ namespace Velentr.Font
             var underrun = 0;
             var finalCharacterIndex = text.Length - 1;
 
+            var currentColor = color;
             for (var i = 0; i < text.Length; i++)
             {
                 TryGetGlyph(text[i], out var cachedCharacter);
@@ -313,6 +338,15 @@ namespace Velentr.Font
                     return;
                 }
 
+                // Markdown rules
+                if (applyMarkdown && text[i] == '[')
+                {
+                    var results = ApplyMarkdownCommands(text, color, i);
+                    i = results.Item1;
+                    currentColor = results.Item2;
+                    continue;
+                }
+
                 // calculate underrun
                 underrun += -cachedCharacter.BearingX;
                 if (offsetX == 0)
@@ -327,7 +361,7 @@ namespace Velentr.Font
 
                 var characterPosition = new Vector2(boundaries.X + offsetX, boundaries.Y + offsetY);
                 Vector2.Transform(ref characterPosition, ref transformation, out characterPosition);
-                spriteBatch.Draw(cachedCharacter.GlyphCache.Texture, characterPosition, cachedCharacter.Boundary, color, rotation, origin, scale, effects, layerDepth);
+                spriteBatch.Draw(cachedCharacter.GlyphCache.Texture, characterPosition, cachedCharacter.Boundary, currentColor, rotation, origin, scale, effects, layerDepth);
                 offsetX += cachedCharacter.Boundary.Width;
 
                 // calculate kerning
@@ -351,18 +385,20 @@ namespace Velentr.Font
         /// Pre-generates a list of Glyphs to draw to the string.
         /// </summary>
         /// <param name="text">The text.</param>
+        /// <param name="applyMarkdown">Whether to apply markdown commands or not. Defaults to false. If set to true, Color will be the default color.</param>
         /// <returns>A Text object representing the Glyphs we need to draw to the screen for the input string.</returns>
-        public Text MakeText(StringBuilder text)
+        public Text MakeText(StringBuilder text, bool applyMarkdown = false)
         {
-            return MakeText(text.ToString());
+            return MakeText(text.ToString(), applyMarkdown);
         }
 
         /// <summary>
         /// Pre-generates a list of Glyphs to draw to the string.
         /// </summary>
         /// <param name="text">The text.</param>
+        /// <param name="applyMarkdown">Whether to apply markdown commands or not. Defaults to false. If set to true, Color will be the default color.</param>
         /// <returns>A Text object representing the Glyphs we need to draw to the screen for the input string.</returns>
-        public Text MakeText(string text)
+        public Text MakeText(string text, bool applyMarkdown = false)
         {
             Text textResult;
             if (!TextCache.TryGetItem(text, out textResult))
@@ -377,6 +413,7 @@ namespace Velentr.Font
                 var underrun = 0;
                 var finalCharacterIndex = text.Length - 1;
 
+                var currentColor = Color.White;
                 for (var i = 0; i < text.Length; i++)
                 {
                     TryGetGlyph(text[i], out var cachedCharacter);
@@ -402,6 +439,15 @@ namespace Velentr.Font
                         continue;
                     }
 
+                    // Markdown rules
+                    if (applyMarkdown && text[i] == '[')
+                    {
+                        var results = ApplyMarkdownCommands(text, Color.White, i);
+                        i = results.Item1;
+                        currentColor = results.Item2;
+                        continue;
+                    }
+
                     // calculate underrun
                     underrun += -cachedCharacter.BearingX;
                     if (offsetX == 0)
@@ -414,7 +460,7 @@ namespace Velentr.Font
                         underrun = 0;
                     }
 
-                    textResult.AddCharacter(new TextCharacter(cachedCharacter, new Vector2(offsetX, offsetY)));
+                    textResult.AddCharacter(new TextCharacter(cachedCharacter, new Vector2(offsetX, offsetY), applyMarkdown ? (Color?)currentColor : null));
                     offsetX += cachedCharacter.Boundary.Width;
 
                     // calculate kerning
@@ -492,6 +538,14 @@ namespace Velentr.Font
 
                 if (text[i] == '\r' || text[i] == '\n')
                 {
+                    continue;
+                }
+
+                // Markdown rules
+                if (text[i] == '[')
+                {
+                    var results = ApplyMarkdownCommands(text, Color.White, i);
+                    i = results.Item1;
                     continue;
                 }
 
@@ -610,6 +664,10 @@ namespace Velentr.Font
             return !(left is null) && !left.Equals(right);
         }
 
+        /// <summary>
+        /// Pres the generate character glyphs.
+        /// </summary>
+        /// <param name="characters">The characters.</param>
         internal void PreGenerateCharacterGlyphs(char[] characters)
         {
             if (characters == null)
@@ -641,6 +699,12 @@ namespace Velentr.Font
             return kerning;
         }
 
+        /// <summary>
+        /// Generates the glyph.
+        /// </summary>
+        /// <param name="character">The character.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Could not generate character [{character}]!</exception>
         private Internal.Glyph GenerateGlyph(char character)
         {
             var cache = _glyphCaches.FirstOrDefault(c => !c.Full);
@@ -663,6 +727,12 @@ namespace Velentr.Font
             return cachedGlyph;
         }
 
+        /// <summary>
+        /// Tries the get glyph.
+        /// </summary>
+        /// <param name="character">The character.</param>
+        /// <param name="glyph">The glyph.</param>
+        /// <returns></returns>
         private bool TryGetGlyph(char character, out Internal.Glyph glyph)
         {
             if (!CharacterGlyphs.TryGetValue(character, out glyph))
@@ -672,6 +742,67 @@ namespace Velentr.Font
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Applies the markdown commands.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="defaultColor">The default color.</param>
+        /// <param name="currentIndex">Index of the current.</param>
+        /// <returns>(new index, new text color)</returns>
+        /// <exception cref="Exception">
+        /// Invalid markdown exception!
+        /// </exception>
+        private (int, Color) ApplyMarkdownCommands(string text, Color defaultColor, int currentIndex)
+        {
+            int finalIIndex;
+            int endIndex;
+            var finalColor = defaultColor;
+            switch (text[currentIndex + 1])
+            {
+                // invalid markdown, we'll skip this markdown...
+                case ']':
+                case '/':
+                    endIndex = text.Substring(currentIndex).IndexOf(']');
+                    finalIIndex = endIndex == -1 ? text.Length : endIndex + currentIndex;
+
+                    if (text[currentIndex + 1] == '/')
+                    {
+                        finalColor = defaultColor;
+                    }
+                    break;
+                default:
+                    endIndex = text.Substring(currentIndex).IndexOf(']');
+                    finalIIndex = endIndex == -1 ? text.Length : endIndex + currentIndex;
+                    var length = finalIIndex - (currentIndex + 1);
+                    var rawMarkdown = text.Substring(currentIndex + 1, length);
+                    var cmd = rawMarkdown.Split(':');
+                    if (cmd.Length != 2)
+                    {
+                        throw new Exception("Invalid markdown exception!");
+                    }
+
+                    cmd[0] = cmd[0].Trim().ToUpperInvariant();
+                    cmd[1] = cmd[1].Trim().ToUpperInvariant();
+
+                    // Color command
+                    if (cmd[0] == "C" || cmd[0] == "COLOR")
+                    {
+                        if (Constants.Settings.ColorMapping.TryGetValue(cmd[1], out var newColor))
+                        {
+                            finalColor = newColor;
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid markdown exception!");
+                        }
+                    }
+
+                    break;
+            }
+
+            return (finalIIndex, finalColor);
         }
     }
 }
