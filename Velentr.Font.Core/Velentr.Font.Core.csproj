@@ -1,12 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Platforms>AnyCPU</Platforms>
     <RootNamespace>Velentr.Font</RootNamespace>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="SharpFont.Dependencies" Version="2.6.0" />
@@ -14,7 +12,6 @@
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="Velentr.Collections" Version="1.0.3" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Update="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.5\contentFiles\any\netstandard2.0\lib\x64\freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -25,5 +22,4 @@
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
   </ItemGroup>
-
 </Project>

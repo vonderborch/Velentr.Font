@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Platforms>AnyCPU</Platforms>
@@ -11,23 +10,19 @@
     <PackageProjectUrl>https://github.com/vonderborch/Velentr.Font</PackageProjectUrl>
     <Description>An alternative solution for Monogame/FNA/XNA-derived frameworks that utilizes SharpFont to draw text rather than the traditional SpriteFont approach.</Description>
     <PackageTags>SharpFont, FNA, SpriteFont, Font</PackageTags>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>C:\Users\ricky\OneDrive\repos\BragiFont\BragiFont.FNA\BragiFont.FNA.xml</DocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.2\contentFiles\any\netstandard2.0\lib\x64\freetype6.dll" />
     <Content Remove="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.2\contentFiles\any\netstandard2.0\lib\x86\freetype6.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Velentr.Font.Core\Constants.cs" Link="Constants.cs" />
     <Compile Include="..\Velentr.Font.Core\DrawStringExtensions.cs" Link="DrawStringExtensions.cs" />
@@ -45,65 +40,54 @@
     <Compile Include="..\Velentr.Font.Core\Text.cs" Link="Text.cs" />
     <Compile Include="..\Velentr.Font.Core\Typeface.cs" Link="Typeface.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="fnalibs" Version="21.3.5" />
     <PackageReference Include="SharpFont.NetStandard" Version="1.0.5" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="Velentr.Collections" Version="1.0.3" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Internal\" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
     <None Include="..\README.md">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\FAudio.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\FNA3D.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\libtheorafile.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\SDL2.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\FAudio.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\FNA3D.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\libtheorafile.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\SDL2.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\FNA\FNA.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Update="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.5\contentFiles\any\netstandard2.0\lib\x64\freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -114,5 +98,4 @@
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
   </ItemGroup>
-
 </Project>

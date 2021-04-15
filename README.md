@@ -6,6 +6,11 @@ There are nuget packages available for Monogame and FNA.
 - Monogame: [Velentr.Font.Monogame](https://www.nuget.org/packages/Velentr.Font.Monogame/)
 - FNA: [Velentr.Font.FNA](https://www.nuget.org/packages/Velentr.Font.FNA/)
 
+Running into an error with the freetype6 dll such as the below in your project?
+![Screenshot](https://github.com/vonderborch/Velentr.Font/blob/main/BadDependency.PNG?raw=true)
+
+**To fix the error, add the following nuget package to your project: [SharpFont.NetStandard](https://www.nuget.org/packages/SharpFont.NetStandard/)**
+
 # Usage
 Approach 1: Draw Text Directly
 ```

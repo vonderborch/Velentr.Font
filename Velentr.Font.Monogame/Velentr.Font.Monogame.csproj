@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Platforms>AnyCPU</Platforms>
@@ -11,13 +10,11 @@
     <PackageProjectUrl>https://github.com/vonderborch/Velentr.Font</PackageProjectUrl>
     <Description>An alternative solution for Monogame/FNA/XNA-derived frameworks that utilizes SharpFont to draw text rather than the traditional SpriteFont approach.</Description>
     <PackageTags>SharpFont, Monogame, SpriteFont, Font</PackageTags>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\ricky\OneDrive\repos\BragiFont\BragiFont.Monogame\BragiFont.Monogame.xml</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Velentr.Font.Core\Constants.cs" Link="Constants.cs" />
     <Compile Include="..\Velentr.Font.Core\DrawStringExtensions.cs" Link="DrawStringExtensions.cs" />
@@ -35,25 +32,22 @@
     <Compile Include="..\Velentr.Font.Core\Text.cs" Link="Text.cs" />
     <Compile Include="..\Velentr.Font.Core\Typeface.cs" Link="Typeface.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="SharpFont.NetStandard" Version="1.0.5" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="Velentr.Collections" Version="1.0.3" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Internal\" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Content Update="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.5\contentFiles\any\netstandard2.0\lib\x64\freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -64,5 +58,4 @@
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
   </ItemGroup>
-
 </Project>
