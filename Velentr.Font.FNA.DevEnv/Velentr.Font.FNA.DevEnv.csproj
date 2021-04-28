@@ -13,6 +13,12 @@
     <RootNamespace>Velentr.Font.FNADevEnv</RootNamespace>
     <Version>1.1.5</Version>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;FNA</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;FNA</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Content\PlayfairDisplayRegular-ywLOY.ttf" />
     <None Remove="Content\Trueno-wml2.otf" />
@@ -36,11 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="fnalibs" Version="21.3.5" />
-    <PackageReference Include="Velentr.Collections" Version="1.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\FNA\FNA.csproj" />
     <ProjectReference Include="..\Velentr.Font.FNA\Velentr.Font.FNA.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Velentr.Font.DevEnv\Game1.cs" Link="Game1.cs" />
+    <Compile Include="..\Velentr.Font.DevEnv\Program.cs" Link="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />

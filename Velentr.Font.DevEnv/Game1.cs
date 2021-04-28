@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Velentr.Font.MonogameDevEnv
+namespace Velentr.Font.DevEnv
 {
     public class Game1 : Game
     {

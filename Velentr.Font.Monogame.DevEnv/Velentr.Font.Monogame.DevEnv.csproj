@@ -20,6 +20,10 @@
     <None Remove="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Velentr.Font.DevEnv\Game1.cs" Link="Game1.cs" />
+    <Compile Include="..\Velentr.Font.DevEnv\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Content\PlayfairDisplayRegular-ywLOY.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -37,7 +41,6 @@
   <ItemGroup>
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
-    <PackageReference Include="Velentr.Collections" Version="1.0.3" />
   </ItemGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
