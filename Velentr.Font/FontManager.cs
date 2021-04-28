@@ -125,9 +125,9 @@ namespace Velentr.Font
         /// Gets or loads the specified font with the specified size.
         /// </summary>
         /// <param name="path">The path to load the font from.</param>
-        /// <param name="size">The size of the font.</param>
         /// <param name="preGenerateCharacters">if set to <c>true</c> [pre generate characters].</param>
         /// <param name="charactersToPregenerate">The characters to pregenerate.</param>
+        /// <param name="storeTypefaceFileData">Whether to store typeface file data.</param>
         /// <returns>The Font that matches the specified parameters.</returns>
         /// <exception cref="Exception">GraphicsDevice is not initialized! Please either initialize VelentrFont.Core or provide the GraphicsDevice when getting a new font.</exception>
         public Typeface GetTypeface(string path, bool preGenerateCharacters = false, char[] charactersToPregenerate = null, bool? storeTypefaceFileData = null)

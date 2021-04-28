@@ -10,16 +10,17 @@
     <PackageProjectUrl>https://github.com/vonderborch/Velentr.Font</PackageProjectUrl>
     <Description>An alternative solution for Monogame/FNA/XNA-derived frameworks that utilizes SharpFont to draw text rather than the traditional SpriteFont approach.</Description>
     <PackageTags>SharpFont, Monogame, SpriteFont, Font</PackageTags>
-    <Version>1.2.0</Version>
+    <Version>1.2.6</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>..\release\Monogame\BragiFont.Monogame.xml</DocumentationFile>
+    <DocumentationFile>..\release\Monogame\Velentr.Font.Monogame.xml</DocumentationFile>
     <OutputPath>..\release\Monogame</OutputPath>
     <DefineConstants>TRACE;MONOGAME</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;MONOGAME</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\Velentr.Font\Constants.cs" Link="Constants.cs" />
     <Compile Include="..\Velentr.Font\DrawStringExtensions.cs" Link="DrawStringExtensions.cs" />
@@ -54,11 +55,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Update="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.5\contentFiles\any\netstandard2.0\lib\x64\freetype6.dll">
+    <Content Include="lib\x64\freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
-    <Content Update="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.5\contentFiles\any\netstandard2.0\lib\x86\freetype6.dll">
+    <Content Include="lib\x86\freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
