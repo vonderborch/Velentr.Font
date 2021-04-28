@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Platforms>AnyCPU</Platforms>
@@ -20,10 +20,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.2\contentFiles\any\netstandard2.0\lib\x64\freetype6.dll" />
-    <Content Remove="C:\Users\ricky\.nuget\packages\sharpfont.netstandard\1.0.2\contentFiles\any\netstandard2.0\lib\x86\freetype6.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\Velentr.Font\Constants.cs" Link="Constants.cs" />
     <Compile Include="..\Velentr.Font\DrawStringExtensions.cs" Link="DrawStringExtensions.cs" />
     <Compile Include="..\Velentr.Font\DrawStringMarkdownExtensions.cs" Link="DrawStringMarkdownExtensions.cs" />
@@ -42,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="fnalibs" Version="21.3.5" />
-    <PackageReference Include="SharpFont.NetStandard" Version="1.0.5" />
+    <PackageReference Include="SharpFont.NetStandard" Version="1.0.5" GeneratePathProperty="true" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="Velentr.Collections" Version="1.0.5" />
   </ItemGroup>
@@ -60,30 +56,6 @@
       <PackagePath>
       </PackagePath>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\FAudio.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\FNA3D.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\libtheorafile.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x64\SDL2.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\FAudio.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\FNA3D.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\libtheorafile.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="C:\Users\ricky\.nuget\packages\fna.package\21.3.5\build\..\lib\x86\SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FNA\FNA.Core.csproj" />
