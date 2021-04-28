@@ -14,12 +14,12 @@ namespace Velentr.Font
         /// <summary>
         /// The default hidef texture size
         /// </summary>
-        public const int DEFAULT_HIDEF_TEXTURE_SIZE = 2048;
+        public const int DEFAULT_HIDEF_TEXTURE_SIZE = 4096;
 
         /// <summary>
         /// The default reach texture size
         /// </summary>
-        public const int DEFAULT_REACH_TEXTURE_SIZE = 1024;
+        public const int DEFAULT_REACH_TEXTURE_SIZE = 2048;
 
         /// <summary>
         /// The default cache surface format
@@ -119,8 +119,18 @@ namespace Velentr.Font
         /// </summary>
         public int MaxTextCacheSize = 16;
 
+        /// <summary>
+        ///     The color mapping.
+        /// </summary>
         private Dictionary<string, Color> _colorMapping = null;
 
+        /// <summary>
+        ///     Gets the color mapping.
+        /// </summary>
+        ///
+        /// <value>
+        ///     The color mapping.
+        /// </value>
         public Dictionary<string, Color> ColorMapping
         {
             get
