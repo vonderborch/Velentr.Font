@@ -13,7 +13,12 @@
     <Version>1.2.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\ricky\OneDrive\repos\BragiFont\BragiFont.Monogame\BragiFont.Monogame.xml</DocumentationFile>
+    <DocumentationFile>..\release\Monogame\BragiFont.Monogame.xml</DocumentationFile>
+    <OutputPath>..\release\Monogame</OutputPath>
+    <DefineConstants>TRACE;MONOGAME</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;MONOGAME</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Velentr.Font\Constants.cs" Link="Constants.cs" />
@@ -36,7 +41,7 @@
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="SharpFont.NetStandard" Version="1.0.5" GeneratePathProperty="true" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
-    <PackageReference Include="Velentr.Collections" Version="1.0.5" />
+    <PackageReference Include="Velentr.Collections" Version="1.1.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Internal\" />
