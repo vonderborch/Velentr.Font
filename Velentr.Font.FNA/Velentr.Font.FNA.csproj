@@ -64,13 +64,13 @@
     <ProjectReference Include="..\FNA\FNA.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib\x64\freetype6.dll">
+    <None Update="lib\x64\freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
-    <Content Include="lib\x86\freetype6.dll">
+    </None>
+    <None Update="lib\x86\freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
+    </None>
   </ItemGroup>
 </Project>
