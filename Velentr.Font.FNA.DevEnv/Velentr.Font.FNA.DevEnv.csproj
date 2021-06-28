@@ -26,6 +26,10 @@
     <None Remove="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Velentr.Font.DevEnv\Game1.cs" Link="Game1.cs" />
+    <Compile Include="..\Velentr.Font.DevEnv\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Content\PlayfairDisplayRegular-ywLOY.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -46,10 +50,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FNA\FNA.csproj" />
     <ProjectReference Include="..\Velentr.Font.FNA\Velentr.Font.FNA.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Velentr.Font.DevEnv\Game1.cs" Link="Game1.cs" />
-    <Compile Include="..\Velentr.Font.DevEnv\Program.cs" Link="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />

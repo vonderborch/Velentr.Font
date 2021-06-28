@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>2095bc84-2ef2-49e6-853a-5ddc228e3fc9</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Velentr.Font</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DrawStringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DrawStringMarkdownExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Font.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FontManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Cache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\FontImplementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Glyph.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\GlyphCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Helpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\TextCharacter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\TextImplementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\TypefaceImplementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MarkdownMapping.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Text.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Typeface.cs" />
+  </ItemGroup>
+</Project>
