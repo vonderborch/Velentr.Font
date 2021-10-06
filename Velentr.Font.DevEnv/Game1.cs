@@ -51,6 +51,24 @@ namespace Velentr.Font.DevEnv
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            var size1a = font1.MeasureText("Hello World!");
+            var size1b = font1.MakeText("Hello World!").Size;
+            var size1c = font1.MeasureText("Hello World!");
+
+            var size2a = font1.MeasureText("Hello\nWorld!");
+            var size2b = font1.MakeText("Hello\nWorld!").Size;
+            var size2c = font1.MeasureText("Hello\nWorld!");
+
+
+
+            var size3a = font2.MeasureText("Hello World!");
+            var size3b = font2.MakeText("Hello World!").Size;
+            var size3c = font2.MeasureText("Hello World!");
+
+            var size4a = font2.MeasureText("Hello\nWorld!");
+            var size4b = font2.MakeText("Hello\nWorld!").Size;
+            var size4c = font2.MeasureText("Hello\nWorld!");
+
             base.Update(gameTime);
         }
 

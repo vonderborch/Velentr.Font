@@ -498,9 +498,9 @@ namespace Velentr.Font
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>The size of the text.</returns>
-        public Vector2 MeasureText(StringBuilder text)
+        public Vector2 MeasureText(StringBuilder text, bool applyMarkdown = false)
         {
-            return MeasureText(text.ToString());
+            return MeasureText(text.ToString(), applyMarkdown);
         }
 
         /// <summary>
@@ -508,11 +508,19 @@ namespace Velentr.Font
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>The size of the text.</returns>
-        public Vector2 MeasureText(string text)
+        public Vector2 MeasureText(string text, bool applyMarkdown = false)
         {
+            // exit early if we've got the text in cache from making a Text object previously...
+            if (TextCache.TryGetItem(text, out var textResult))
+            {
+                return textResult.Size;
+            }
+
+            // otherwise, we need to calculate the size of the string...
             var finalSize = new Vector2(0, 0);
 
             var offsetX = 0;
+            var offsetY = 0;
 
             var underrun = 0;
             var finalCharacterIndex = text.Length - 1;
@@ -530,6 +538,7 @@ namespace Velentr.Font
                     finalSize.X = Math.Max(offsetX, finalSize.X);
                     offsetX = 0;
                     underrun = 0;
+                    offsetY += cachedCharacter.AdvanceY;
                     if (i != finalCharacterIndex)
                     {
                         finalSize.Y += cachedCharacter.AdvanceY;
@@ -542,7 +551,7 @@ namespace Velentr.Font
                 }
 
                 // Markdown rules
-                if (text[i] == '[' && (i > 0 && text[i - 1] != '\\'))
+                if (applyMarkdown && text[i] == '[' && (i > 0 && text[i - 1] != '\\'))
                 {
                     var results = ApplyMarkdownCommands(text, Color.White, i);
                     i = results.Item1;
@@ -576,6 +585,10 @@ namespace Velentr.Font
                             offsetX += kerning;
                         }
                     }
+                }
+                else
+                {
+                    finalSize.X = Math.Max(offsetX, finalSize.X);
                 }
             }
 
