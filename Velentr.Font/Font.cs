@@ -359,7 +359,7 @@ namespace Velentr.Font
                     underrun = 0;
                 }
 
-                var characterPosition = new Vector2(boundaries.X + offsetX, boundaries.Y + offsetY);
+                var characterPosition = new Vector2(offsetX, offsetY);
                 Vector2.Transform(ref characterPosition, ref transformation, out characterPosition);
                 spriteBatch.Draw(cachedCharacter.GlyphCache.Texture, characterPosition, cachedCharacter.Boundary, currentColor, rotation, origin, scale, effects, layerDepth);
                 offsetX += cachedCharacter.Boundary.Width;

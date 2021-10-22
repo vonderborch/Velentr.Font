@@ -74,16 +74,25 @@ namespace Velentr.Font.DevEnv
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Red);
 
             _spriteBatch.Begin();
 
             //_spriteBatch.DrawString(font1, testString, new Vector2(0, -15), Color.Blue);
+            /*
             _spriteBatch.DrawStringWithMarkdown(font1, testString3, new Vector2(0, -15), Color.Black);
             _spriteBatch.DrawString(font1, testString, new Vector2(150, -15), Color.Pink, 0.1f, Vector2.Zero, new Vector2(.5f, .5f), SpriteEffects.None, 1f);
             _spriteBatch.DrawString(text2, new Vector2(50, 150), Color.Red);
             _spriteBatch.DrawString(text1, new Vector2(150, 300), Color.Black, 0.1f, Vector2.Zero, new Vector2(.5f, .5f), SpriteEffects.None, 1f);
             _spriteBatch.DrawString(text1, new Vector2(150, 350), Color.Black, 0.1f, new Vector2(50, 50), new Vector2(.5f, .5f), SpriteEffects.FlipVertically, 1f);
+            */
+
+            var text = "cake";
+            var text2 = font1.MakeText(text);
+            //_spriteBatch.DrawString(font1, text, (new Vector2(75, 75) - (font1.MeasureText(text) / 2)), Color.Blue);
+            //_spriteBatch.DrawString(font1, text, (new Vector2(75, 75) - (font1.MeasureText(text) / 2)), Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 0.5F);
+
+            _spriteBatch.DrawString(text2, (new Vector2(75, 75) - (font1.MeasureText(text) / 2)), Color.Blue);
 
             _spriteBatch.End();
 
