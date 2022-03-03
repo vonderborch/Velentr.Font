@@ -11,7 +11,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <AssemblyName>Velentr.Font.FNADevEnv</AssemblyName>
     <RootNamespace>Velentr.Font.FNADevEnv</RootNamespace>
-    <Version>1.1.5</Version>
+    <Version>1.2.9</Version>
+    <FileVersion>1.2.9</FileVersion>
+    <AssemblyVersion>1.2.9</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;FNA</DefineConstants>
@@ -45,10 +47,10 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="fnalibs" Version="21.3.5" />
+    <PackageReference Include="fnalibs" Version="21.7.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FNA\FNA.csproj" />
+    <ProjectReference Include="..\FNA\FNA.Core.csproj" />
     <ProjectReference Include="..\Velentr.Font.FNA\Velentr.Font.FNA.csproj" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <AssemblyName>Velentr.Font.MonogameDevEnv</AssemblyName>
     <RootNamespace>Velentr.Font.MonogameDevEnv</RootNamespace>
-    <Version>1.1.5</Version>
+    <Version>1.2.9</Version>
+    <FileVersion>1.2.9</FileVersion>
+    <AssemblyVersion>1.2.9</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Content\PlayfairDisplayRegular-ywLOY.ttf" />
